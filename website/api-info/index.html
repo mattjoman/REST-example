@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Developers</title>
+	<link rel="stylesheet" type="text/css" href="../css/styles.css">
+	<meta charset="utf-8">
+</head>
+<body>
+	<header>
+	</header>
+
+	
+	<div id="nav">
+		<span>
+			<a href="../">Home</a>
+			|
+			<a href="./">API Info</a>
+		</span>
+		<span id="email">
+			email
+		</span>
+	</div>
+
+	<div id="title">
+		<h1>API Info</h1>
+	</div>
+
+	<div id="main">
+
+		<h2>Introduction</h2>
+		<p>My API allows direct interactions with the server-side part of the site without the need for my web pages. This makes it easy for developers to build their own front-end to the site.</p>
+		<p>The API follows the REST approach. Resources are determined by the URL and the action you want to take is determined by the HTTP request type. URLs should intuitively describe the resource; If you make a GET request to http://{site}/api/comments/today/ you can expect to receive comments from today. For GET requests you will also receive information about related resources enabling you to navigate the API. All data sent between client and server is JSON.</p>
+		<p>Below is a guide on how to use my API with examples.</p>
+		
+		<h2>How to use the API</h2>
+		<p>By sending a GET request to the API's root you can get links to the available resources:</p>
+
+		<div class="commands">
+			<h4>Request:</h4>
+			<pre><code>GET: http://{website}/api/</pre></code>
+			<h4>Response:</h4>
+			<pre><code>{
+    "links": [
+        {
+            "url": "/api/comments/",
+            "type": "GET"
+        }
+    ]
+}</code></pre>
+		</div>
+
+		<p>At the moment comments are the only resource available, as seen in the JSON response.</p>
+		
+		<h3>Comments</h3>
+		<p>The request below will return further information about the comments as well as a link back to the api root. To access comments you also need to provide a filter like "today" or "3-days-ago". This information is included in the response:</p>
+
+
+		<div class="commands">
+			<h4>Request:</h4>
+			<pre><code>GET: http://{website}/api/comments/</pre></code>
+			<h4>Response:</h4>
+			<pre><code>{
+    "links": [
+        {
+            "url": "/api/",
+            "type": "GET"
+        },
+        {
+            "url": "/api/comments/",
+	    "type": "POST"
+        },
+        {
+            "url": "/api/comments/past-week/",
+	    "type": "GET"
+        },
+        {
+            "url": "/api/comments/today/",
+            "type": "GET"
+        },
+        {
+            "url": "/api/comments/1-day-ago/",
+	    "type": "GET"
+        },
+        {
+            "url": "/api/comments/2-day-ago/",
+            "type": "GET"
+        },
+        {
+            "url": "/api/comments/3-day-ago/",
+            "type": "GET"
+        },
+        {
+            "url": "/api/comments/4-day-ago/",
+            "type": "GET"
+        },
+        {
+            "url": "/api/comments/5-day-ago/",
+            "type": "GET"
+        },
+        {
+            "url": "/api/comments/6-day-ago/",
+            "type": "GET"
+        }
+    ]
+}</code></pre>
+		</div>
+
+
+		<p>Here are two examples of requests which include the filter, and the response they would get.</p>
+
+
+		<div class="commands">
+			<h4>Request:</h4>
+			<pre><code>GET: http://{website}/api/comments/past-week/
+GET: https://matthewpenney.net/api/comments/2-days-ago/</pre></code>
+			<h4>Response:</h4>
+			<pre><code>{
+    "links": [
+        {
+            "url": "/api/comments/",
+            "type": "POST"
+        },
+        {
+            "url": "/api/comments/",
+            "type": "GET"
+        }
+    ],
+    "comments": [
+        {
+            "comment": "some comment",
+	    "day_posted": "dd/mm/yyyy",
+	    "name": "Jeff"
+	},
+	{
+            "comment": "another comment",
+	    "day_posted": "dd/mm/yyyy",
+	    "name": "Nigel"
+        }
+    ]
+}</code></pre>
+		</div>
+
+
+		<p>You can also use a POST request to post a comment. You will need to include JSON data in the body of the request containing your comment, as shown below:</p>
+		<div class="commands">
+			<h4>Request:</h4>
+			<pre><code>POST: http://{website}/api/comments/</code></pre>
+			<h4>Request body:</h4>
+			<pre><code>{
+    "comment": "Your comment"
+    "name": "Your name"
+}</code></pre>
+		</div>
+
+	</div>
+
+	<footer>
+	</footer>
+</body>
+</html>
+

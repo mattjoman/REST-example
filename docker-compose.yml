@@ -1,0 +1,41 @@
+version: '3'
+services:
+        web:
+                image: nginx:latest
+                volumes:
+                        - ./website/:/var/www/html/
+                        - ./nginx/:/etc/nginx/conf.d/
+                ports:
+                        - 80:80
+                networks:
+                        - internal
+                depends_on:
+                        - php
+        php:
+        #        image: php:fpm-alpine
+                build:
+                        context: .
+                        dockerfile: php-fpm/Dockerfile
+                volumes:
+                        - ./website/:/var/www/html/
+                networks:
+                        - internal
+                depends_on:
+                        - database
+        database:
+                image: mysql:latest
+                environment:
+                        - MYSQL_ROOT_PASSWORD=test123
+                volumes:
+                        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+                expose:
+                        - "3306"
+                ports:
+                        - 3306:3306
+                networks:
+                        - internal
+
+networks:
+        internal:
+                driver: bridge
+

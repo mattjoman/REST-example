@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Comments</title>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="/css/styles.css">
+	</head>
+	<body id="body">
+		<header></header>
+		<div id="nav">
+			<span>
+				<a href="./">Home</a>
+				|
+				<a href="./api-info/">API Info</a>
+			</span>
+			<span id="email">
+				email
+			</span>
+		</div>
+		<div id="title">
+			<h1>Comments</h1>
+		</div>
+		<div id="main">
+
+			<div id="resourceSpecific" class="container">
+
+
+				<div id="postContainer">
+					<h2>Post a comment</h2>
+					<p>This is a front-end to the api. For more info look at website/comments.js.</p>
+					<form type="submit" id="postForm">
+						<label>Name:</label>
+						<input id="myName" placeholder="Optional"></input>
+						<label>Comment:</label>
+						<input id="myMessage"></input>
+						<button>Go</button>
+					</form>
+				</div>
+
+				<div id="filterContainer">
+					<h2>Get comments</h2>
+					<form type="submit" id="filterForm">
+						<label>Show comments from:</label>
+						<select id="selectFilter">
+							<option value="all">Last 7 days</option>
+							<option value="0">Today</option>
+							<option value="1">1 day ago</option>
+							<option value="2">2 days ago</option>
+							<option value="3">3 days ago</option>
+							<option value="4">4 days ago</option>
+							<option value="5">5 days ago</option>
+							<option value="6">6 days ago</option>
+						</select>
+						<button>Go</button>
+					</form>
+				</div>
+			</div>
+
+			<div id="displayData" class="container"></div>
+
+		</div>
+	</body>
+	<script src="/js/comments.js"></script>
+</html>
+
